@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}IG Automation{% endblock %}</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">IG</div>
+        <div class="brand-text">Comment→DM</div>
+      </div>
+      <nav>
+        <a href="/dashboard" class="nav-link {% if page == 'campaigns' %}active{% endif %}">
+          <span class="nav-icon">◈</span> Campaigns
+        </a>
+        <a href="/dashboard/settings" class="nav-link {% if page == 'settings' %}active{% endif %}">
+          <span class="nav-icon">⚙</span> Settings
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <span id="config-status" class="pill pill-muted">checking…</span>
+      </div>
+    </aside>
+    <main class="main">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="/static/app.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

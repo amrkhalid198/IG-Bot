@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Campaigns · IG Automation{% endblock %}
+{% block content %}
+<header class="page-header">
+  <div class="page-header-row">
+    <div>
+      <h1>Campaigns</h1>
+      <p class="subtitle">Keyword-triggered comment replies + DMs.</p>
+    </div>
+    <button class="btn btn-primary" onclick="openModal()">+ New campaign</button>
+  </div>
+</header>
+
+<section id="campaign-list" class="campaign-grid">
+  <div class="empty-state" id="empty-state" hidden>
+    <p>No campaigns yet.</p>
+    <button class="btn btn-primary" onclick="openModal()">Create your first campaign</button>
+  </div>
+</section>
+
+<!-- Modal -->
+<div id="modal" class="modal-backdrop" hidden>
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="modal-title">New campaign</h2>
+      <button class="btn-icon" onclick="closeModal()">✕</button>
+    </div>
+    <form id="campaign-form">
+      <input type="hidden" id="c-id">
+      <div class="field">
+        <label for="c-name">Campaign name</label>
+        <input type="text" id="c-name" placeholder="e.g. Free guide — July reel" required>
+      </div>
+      <div class="field">
+        <label for="c-post">Post ID</label>
+        <input type="text" id="c-post" placeholder="e.g. 17895695668004550" required>
+        <small class="hint">Media ID from the Graph API (README § Getting a Post ID). Preview loads when you leave this field.</small>
+      </div>
+      <div id="post-preview" class="post-preview" hidden>
+        <img id="pp-img" alt="Post thumbnail">
+        <p id="pp-caption"></p>
+      </div>
+      <div class="field">
+        <label for="c-keywords">Trigger keywords</label>
+        <input type="text" id="c-keywords" placeholder="guide, link, info" required>
+        <small class="hint">Comma-separated. Case-insensitive, matches anywhere in the comment.</small>
+      </div>
+      <div class="field">
+        <label for="c-reply">Public comment reply</label>
+        <textarea id="c-reply" rows="2" placeholder="Sent you a DM! 📩" required></textarea>
+      </div>
+      <div class="field">
+        <label for="c-dm">DM message</label>
+        <textarea id="c-dm" rows="4" placeholder="Hey! Here's the link you asked for: …" required></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn" onclick="closeModal()">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="save-btn">Save campaign</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/campaigns.js"></script>
+{% endblock %}

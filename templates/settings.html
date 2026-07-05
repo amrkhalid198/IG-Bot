@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Settings · IG Automation{% endblock %}
+{% block content %}
+<header class="page-header">
+  <div class="page-header-row">
+    <div>
+      <h1>Settings</h1>
+      <p class="subtitle">Instagram Graph API credentials. Stored server-side only — never exposed to the browser.</p>
+    </div>
+    <a href="/dashboard" class="btn-icon" title="Back to campaigns" aria-label="Back to campaigns">✕</a>
+  </div>
+</header>
+
+<section class="card">
+  <form id="settings-form">
+    <div class="field">
+      <label for="access_token">Long-lived User Access Token</label>
+      <input type="password" id="access_token" placeholder="Leave blank to keep current token" autocomplete="off">
+      <small id="token-hint" class="hint"></small>
+    </div>
+    <div class="field">
+      <label for="page_id">Facebook Page ID</label>
+      <input type="text" id="page_id" placeholder="e.g. 1784660... ">
+      <small class="hint">The Facebook Page linked to your Instagram Business account.</small>
+    </div>
+    <div class="field">
+      <label for="ig_business_account_id">Instagram Business Account ID</label>
+      <input type="text" id="ig_business_account_id" placeholder="e.g. 1784139...">
+      <small class="hint">Found via <code>GET /{page-id}?fields=instagram_business_account</code> — see README.</small>
+    </div>
+    <div class="modal-footer">
+      <a href="/dashboard" class="btn" role="button">Cancel</a>
+      <button type="submit" class="btn btn-primary">Save credentials</button>
+    </div>
+  </form>
+</section>
+
+<section class="card card-note">
+  <h3>Token expiry reminder</h3>
+  <p>Long-lived tokens expire after ~60 days. Refresh before expiry (README § Token refresh) and paste the new token here.</p>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+async function loadSettings() {
+  const cfg = await api('GET', '/api/config');
+  document.getElementById('page_id').value = cfg.page_id;
+  document.getElementById('ig_business_account_id').value = cfg.ig_business_account_id;
+  document.getElementById('token-hint').textContent = cfg.access_token_masked
+    ? `Current token: ${cfg.access_token_masked}` : 'No token saved yet.';
+}
+
+document.getElementById('settings-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  await api('POST', '/api/config', {
+    access_token: document.getElementById('access_token').value.trim(),
+    page_id: document.getElementById('page_id').value.trim(),
+    ig_business_account_id: document.getElementById('ig_business_account_id').value.trim(),
+  });
+  document.getElementById('access_token').value = '';
+  toast('Credentials saved');
+  loadSettings();
+  refreshConfigStatus();
+});
+
+loadSettings();
+</script>
+{% endblock %}

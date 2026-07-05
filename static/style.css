@@ -1,0 +1,223 @@
+/* IG Comment-to-DM dashboard — dark professional theme */
+:root {
+  --bg: #0e1116;
+  --bg-raised: #161b22;
+  --bg-input: #0d1117;
+  --border: #2b3240;
+  --text: #e6e9ef;
+  --text-dim: #8b94a5;
+  --accent: #e1306c;          /* Instagram pink */
+  --accent-hover: #f04a80;
+  --green: #2ea45f;
+  --red: #e5534b;
+  --radius: 10px;
+  font-size: 15px;
+}
+
+* { box-sizing: border-box; margin: 0; }
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app { display: flex; min-height: 100vh; }
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  width: 230px;
+  flex-shrink: 0;
+  background: var(--bg-raised);
+  border-right: 1px solid var(--border);
+  padding: 20px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.brand { display: flex; align-items: center; gap: 10px; padding: 0 8px; }
+.brand-mark {
+  width: 34px; height: 34px; border-radius: 9px;
+  background: linear-gradient(135deg, #f58529, #dd2a7b 55%, #8134af);
+  display: grid; place-items: center;
+  font-weight: 700; font-size: 13px; color: #fff;
+}
+.brand-text { font-weight: 600; letter-spacing: .2px; }
+nav { display: flex; flex-direction: column; gap: 4px; }
+.nav-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px; border-radius: 8px;
+  color: var(--text-dim); text-decoration: none; font-weight: 500;
+}
+.nav-link:hover { background: rgba(255,255,255,.05); color: var(--text); }
+.nav-link.active { background: rgba(225,48,108,.14); color: var(--accent-hover); }
+.nav-icon { width: 18px; text-align: center; }
+.sidebar-footer { margin-top: auto; padding: 0 8px; }
+
+/* ---------- Main ---------- */
+.main { flex: 1; padding: 32px 40px; max-width: 1100px; }
+.page-header { margin-bottom: 24px; }
+.page-header-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+h1 { font-size: 1.5rem; margin-bottom: 4px; }
+.subtitle { color: var(--text-dim); }
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 20px;
+  max-width: 640px;
+}
+.card-note { border-left: 3px solid var(--accent); }
+.card-note h3 { margin-bottom: 6px; font-size: 1rem; }
+.card-note p { color: var(--text-dim); }
+
+/* ---------- Forms ---------- */
+.field { margin-bottom: 16px; }
+label { display: block; font-weight: 600; margin-bottom: 6px; font-size: .92rem; }
+input, textarea {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  padding: 10px 12px;
+  font: inherit;
+}
+input:focus, textarea:focus { outline: none; border-color: var(--accent); }
+.hint { display: block; margin-top: 5px; color: var(--text-dim); font-size: .82rem; }
+code { background: rgba(255,255,255,.07); padding: 1px 5px; border-radius: 4px; font-size: .85em; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 9px 16px;
+  border-radius: 8px;
+  font: inherit; font-weight: 600;
+  cursor: pointer;
+}
+.btn:hover { border-color: var(--text-dim); }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+.btn-danger:hover { border-color: var(--red); color: var(--red); }
+.btn-icon {
+  background: none; border: none; color: var(--text-dim);
+  font-size: 1rem; cursor: pointer; padding: 4px 8px;
+}
+.btn-icon:hover { color: var(--text); }
+.btn-sm { padding: 5px 10px; font-size: .85rem; }
+
+/* ---------- Pills / badges ---------- */
+.pill {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: .78rem; font-weight: 600;
+}
+.pill-active { background: rgba(46,164,95,.15); color: #4cc97a; }
+.pill-inactive { background: rgba(139,148,165,.15); color: var(--text-dim); }
+.pill-muted { background: rgba(139,148,165,.12); color: var(--text-dim); }
+.pill-ok { background: rgba(46,164,95,.15); color: #4cc97a; }
+.pill-warn { background: rgba(229,83,75,.15); color: #ef7b74; }
+
+/* ---------- Campaign grid ---------- */
+.campaign-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.campaign-card {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.campaign-thumb { width: 100%; height: 140px; object-fit: cover; background: #000; }
+.campaign-thumb-placeholder {
+  width: 100%; height: 140px;
+  background: linear-gradient(135deg, #1a2030, #10141c);
+  display: grid; place-items: center;
+  color: var(--text-dim); font-size: .85rem;
+}
+.campaign-body { padding: 16px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.campaign-title-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.campaign-title { font-weight: 600; }
+.campaign-caption {
+  color: var(--text-dim); font-size: .82rem;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.keyword-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.kw {
+  background: rgba(225,48,108,.12); color: var(--accent-hover);
+  padding: 2px 9px; border-radius: 99px; font-size: .78rem; font-weight: 600;
+}
+.campaign-actions { display: flex; gap: 8px; margin-top: auto; padding-top: 8px; }
+
+.empty-state {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-dim);
+  display: flex; flex-direction: column; gap: 14px; align-items: center;
+}
+
+/* ---------- Post preview ---------- */
+.post-preview {
+  display: flex; gap: 12px; align-items: center;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 16px;
+}
+.post-preview img { width: 64px; height: 64px; object-fit: cover; border-radius: 6px; }
+.post-preview p { color: var(--text-dim); font-size: .85rem; }
+
+/* ---------- Modal ---------- */
+.modal-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.6);
+  display: grid; place-items: center;
+  z-index: 50;
+  padding: 20px;
+}
+/* The class-selector `display: grid` above overrides the browser's default
+   [hidden]{display:none}, so the `hidden` attribute alone can't close the
+   modal. This rule (class + attribute = higher specificity) makes hidden win,
+   so closeModal() / the ✕ and Cancel buttons actually hide it. */
+.modal-backdrop[hidden] { display: none !important; }
+.modal {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  width: 100%; max-width: 560px;
+  max-height: 90vh; overflow-y: auto;
+  padding: 24px;
+}
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+.modal-footer { display: flex; justify-content: flex-end; gap: 10px; margin-top: 8px; }
+
+/* ---------- Toast ---------- */
+.toast {
+  position: fixed; bottom: 24px; right: 24px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--green);
+  border-radius: 8px;
+  padding: 12px 18px;
+  opacity: 0; transform: translateY(8px);
+  transition: all .25s ease;
+  pointer-events: none;
+  z-index: 100;
+}
+.toast.show { opacity: 1; transform: none; }
+.toast.error { border-left-color: var(--red); }
+
+@media (max-width: 720px) {
+  .app { flex-direction: column; }
+  .sidebar { width: 100%; flex-direction: row; align-items: center; }
+  .sidebar nav { flex-direction: row; }
+  .sidebar-footer { margin: 0 0 0 auto; }
+  .main { padding: 20px; }
+}
